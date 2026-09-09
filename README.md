@@ -358,5 +358,5 @@ k = 2;
 }
 
 ```
-完整练习代码：[tsconfig.json](./tsconfig.json)
+完整练习代码：day04 tsconfig/day04 tsconfig.json
 ---
