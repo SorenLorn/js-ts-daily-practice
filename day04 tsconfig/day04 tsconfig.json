@@ -1,0 +1,69 @@
+{
+    /*
+        tsconfig.json是ts的配置文件，tsconfig.json文件中包含了编译器选项、文件路径、排除文件等信息。
+        "include" 指定要编译的文件或文件夹，
+        路径：** 表示匹配任意目录，
+        * 表示匹配任意文件名，
+        ? 表示匹配任意单个字符，
+        ! 表示排除匹配的文件或文件夹。
+
+        "exclude"指定不需要编译的文件或文件夹，
+        默认值是["node_modules", "bower_components", "jspm_packages"], 如果指定了"exclude"，则默认值将被覆盖。
+
+        "compilerOptions"指定编译器选项。
+    */
+    "include": [
+        "src/**/*"
+    ],
+    //可选，有默认值
+    "exclude": [
+        "node_modules",
+        "dist",
+        "./chapter1/day01_hello/**/*",
+    ],
+    //可选，指定要编译的文件列表，优先级高于include和exclude
+    //指定被编译文件的列表，只有需要编译的文件少量时才使用，通常不建议使用
+    "files": [
+        "src/index.ts"
+    ],
+    /*
+    compilerOptions是tsconfig.json中最重要的配置项，指定编译器选项。
+    */
+    "compilerOptions": {
+        // target指定编译后的js版本，默认值是ES3
+        // 常用的有ES5、ES6/ES2015、ES2016、ES2017、ES2018、ES2019、ES2020、ES2021、ES2022、ESNext
+        "target": "ESNext",
+        // module指定编译后的模块化方案，默认值是CommonJS
+        // 常用的有CommonJS、AMD、UMD、System、ES6/ES2015、ES2020、ESNext
+        "module": "CommonJS",
+        // lib指定编译时需要引用的库文件，默认值是["DOM", "ES5", "ScriptHost", "ES2015"]
+        // 常用的有DOM、DOM.Iterable、ES5、ES6/ES2015、ES2016、ES2017、ES2018、ES2019、ES2020、ES2021、ES2022、ESNext
+        "lib": ["DOM", "DOM.Iterable", "ES5", "ScriptHost", "ES2015"],
+        // outDir指定编译后的文件输出目录，默认值是"./"
+        "outDir": "./dist",
+        // outFile指定编译后的文件输出路径，默认值是"./"
+        // 将代码合并为一个文件输出，适用于AMD和System模块化方案
+        // 设置outFile时，所有的全局作用域中的代码会合并到同一个文件中
+        "outFile": "./dist/index.js",
+        // 是否对js文件进行编译，默认是false
+        "allowJs": false,
+        // 是否检查js代码是否符合语法规范，默认值是false
+        "checkJs": false,
+        // 是否移除注释
+        "removeComments":false,
+        // 不生成编译后的文件
+        "noEmit": false,
+        // 当有错误时不生成编译后的文件
+        "noEmitOnError": false,
+        // 所有严格检查的总开关
+        "strict": true, //以下即可不写
+        // 用来设置编译后的文件是否使用严格模式，默认false
+        "alwaysStrict":true,
+        // 不允许隐式的any类型
+        "noImplicitAny":true,
+        // 不允许不明确类型的this
+        "noImplicitThis":true,
+        // 严格的检查空值
+        "strictNullChecks":true
+    }
+}
