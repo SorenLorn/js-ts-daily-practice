@@ -287,3 +287,76 @@ k = 2;
 
 完整练习代码：[day03-object-type/day03-object-type.ts](./day03-object-type/day03-object-type.ts)
 ---
+---
+## day04 tsconfig.json 配置文件
+### 1. tsconfig.json 简介
+`tsconfig.json` 是TypeScript项目的配置文件，放在项目根目录。存在这个文件，代表当前文件夹是TS项目根目录。执行`tsc`命令会自动读取该配置，按照规则编译TS代码。
+
+### 2. 顶层配置字段
+#### include
+指定需要编译的文件/文件夹
+- `**`：匹配任意层级子目录
+- `*`：匹配任意文件名
+- `?`：匹配任意单个字符
+```json
+"include": [
+    "src/**/*"
+]
+```
+
+#### exclude
+指定不需要编译的文件/文件夹；手动填写后会覆盖默认排除列表
+```json
+"exclude": [
+    "node_modules",
+    "dist",
+    "./chapter1/day01_hello/**/*"
+]
+```
+
+#### files
+手动指定需要编译的文件列表，优先级最高，适合少量文件场景
+```json
+"files": [
+    "src/index.ts"
+]
+```
+
+### 3. compilerOptions 编译选项（核心）
+```json
+"compilerOptions": {
+    // target：编译输出的JS版本
+    "target": "ESNext",
+    // module：编译后模块化方案
+    "module": "CommonJS",
+    // lib：编译使用内置库
+    "lib": ["DOM", "DOM.Iterable", "ES5", "ScriptHost", "ES2015"],
+    // outDir：编译输出文件夹
+    "outDir": "./dist",
+    // outFile：全部代码合并为单个js文件（AMD/System模块可用）
+    "outFile": "./dist/index.js",
+    // 是否允许编译js文件
+    "allowJs": false,
+    // 是否检查js语法
+    "checkJs": false,
+    // 是否删除注释
+    "removeComments":false,
+    // noEmit：不输出编译后的js
+    "noEmit": false,
+    // 代码报错时不生成编译文件
+    "noEmitOnError": false,
+    // strict：严格模式总开关
+    "strict": true,
+    // alwaysStrict：编译后js启用严格模式
+    "alwaysStrict":true,
+    // 禁止隐式any
+    "noImplicitAny":true,
+    // 不允许模糊this类型
+    "noImplicitThis":true,
+    // 严格空值检查
+    "strictNullChecks":true
+}
+
+```
+完整练习代码：[tsconfig.json](./tsconfig.json)
+---
