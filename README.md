@@ -360,3 +360,78 @@ k = 2;
 ```
 完整练习代码：day04 tsconfig/day04 tsconfig.json
 ---
+
+# Day05 TS 类 Class
+---
+### 一、核心知识点
+- `class`：用于定义类，类可以通过`new`创建实例对象。
+- **实例属性 / 实例方法**：属于实例对象，必须`new`出实例后才能调用。
+- **static 静态属性 / 静态方法**：属于类本身，直接`类名.xxx`访问，实例无法访问静态成员。
+- **readonly**：只读修饰符，属性一旦赋值完成，后续不能修改。可以搭配static使用。
+- 注意：静态方法内`this`指向当前类；实例方法内`this`指向实例对象。
+---
+### 二、完整源码
+```typescript
+// 使用class关键字来定义一个类
+class Person {
+  // 定义实例只读属性，每个实例都会拥有这份属性
+  readonly name: string = 'ssssss';
+  // 实例普通属性
+  gender: string = '男';
+
+  // 在属性前使用static关键字可以定义类属性（静态属性），仅属于Person类
+  static readonly age: number = 18;
+  static desc: string = '人类';
+
+  // 实例方法：需要实例调用
+  sayName() {
+    console.log(`我的名字：${this.name}`);
+  }
+
+  sayGender() {
+    console.log(`我的性别：${this.gender}`);
+  }
+
+  // 如果加了static开头则方法就是类方法(静态方法)，可以直接通过类去调用
+  static sayHello(){
+    console.log('耍起');
+    console.log(`静态属性age：${this.age}`);
+  }
+
+  static showDesc() {
+    console.log(`物种描述：${this.desc}`);
+  }
+}
+
+const per = new Person();
+const per2 = new Person();
+per2.gender = '女';
+
+console.log(per.name);
+console.log(per.gender);
+per.sayName();
+per.sayGender();
+
+console.log(per2.name);
+console.log(per2.gender);
+per2.sayName();
+per2.sayGender();
+
+// per.name = 'tom'; // readonly只读，无法修改，取消注释会报错
+console.log(Person.age);
+console.log(Person.desc);
+
+Person.sayHello();
+Person.showDesc();
+### 三、代码说明
+
+- `readonly name`：实例只读属性，只能通过实例 `per.name` 获取，不能重新赋值。
+- `gender`：普通实例属性，实例可以读取和修改，不同实例可以拥有不同的值。
+- `static readonly age`：静态只读属性，挂载在 `Person` 类上，`Person.age` 访问。
+- `static desc`：普通静态属性，可以读取修改，所有实例共享静态成员。
+- `sayName() / sayGender()`：实例方法，必须用实例调用，内部`this`指向当前实例。
+- `static sayHello() / static showDesc()`：静态方法，不需要实例，直接 `Person.xxx()` 执行，内部`this`指向类本身。
+- 区分重点：**静态成员归类，实例成员归 new 出来的对象**。实例不能访问 static 静态成员，类不能直接调用实例属性和实例方法。
+```
+完整练习代码：day05/class.ts
+---
