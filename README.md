@@ -435,3 +435,45 @@ Person.showDesc();
 ```
 完整练习代码：day05/class.ts
 ---
+
+# Day06 TS 构造函数 constructor
+---
+### 一、核心知识点
+- `constructor` 叫做**构造函数**，在使用 `new` 创建类实例对象的时候自动执行。
+- 构造函数作用：初始化实例对象，给实例添加自定义属性。
+- 构造函数内的 `this`：代表**刚刚new出来的实例对象**。
+- 实例方法里的 `this`：代表**调用这个方法的实例**。
+- 每次`new`类，都会生成独立实例，实例之间属性互不干扰。
+---
+### 二、完整源码
+```typescript
+class Dog{
+    name = '旺财';
+    age = 3;
+
+    // constructor 被称为构造函数
+    // 构造函数会在对象创建时调用
+    constructor(name:string,age:number){
+        // 在实例方法中，this就表示当前新建的那个对象
+        // 在构造函数中当前对象就是当前新建的那个对象
+        // 可以通过this向新建的对象中添加属性
+        this.name = name;
+        this.age = age;
+    }
+
+    bark(){
+        // alert('汪汪')
+        // 在方法中可以通过this来表示当前调用方法的对象
+        console.log(this);
+    }
+}
+
+const dog = new Dog('qqq',12);
+const dog2 = new Dog('eee',14);
+
+console.log(dog);
+console.log(dog2);
+dog.bark();
+```
+完整练习代码：day06/constructor.ts
+---
