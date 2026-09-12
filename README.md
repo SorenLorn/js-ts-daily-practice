@@ -477,3 +477,49 @@ dog.bark();
 ```
 完整练习代码：day06/constructor.ts
 ---
+
+```markdown
+---
+## day07 TS 类继承
+### 1. 继承基础 extends
+`extends` 关键字实现类继承，**子类可以复用父类的属性、方法**，减少重复代码。
+```ts
+class 子类 extends 父类 {
+
+}
+```
+
+### 2. super() 关键字
+- 子类写了`constructor`构造函数，**必须第一行调用 super()**，作用：执行父类的构造函数，给继承来的属性赋值。
+- `super.方法名()`：在子类内调用父类原来的方法。
+```ts
+constructor(name:string){
+  super(name) // 调用父类构造
+}
+```
+
+### 3. 方法重写
+子类定义和父类同名的方法，会**覆盖父类方法**，按需修改逻辑。
+```ts
+class Person {
+  greet(){
+    console.log("hello")
+  }
+}
+class Student extends Person{
+  greet(){
+    // 重写，覆盖父类greet
+    super.greet() // 保留父类原有逻辑，再追加新代码
+    console.log("我是学生")
+  }
+}
+```
+
+### 4. 继承特点
+1. 只能**单继承**，一个子类只能继承1个父类，不能同时extends多个类
+2. 子类可以新增独属于自己的属性/方法
+3. 父类中`private`私有属性，子类无法访问
+
+完整练习代码：day07-extends/index.ts
+> 代码跳转：[day07-extends/index.ts](./day07-extends/index.ts)
+```
