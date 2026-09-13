@@ -525,7 +525,7 @@ class Student extends Person{
 
 ```
 ---
-# day07 TS super关键字
+# day08 TS super关键字
 ### 1. super 在构造函数内
 子类如果自定义`constructor`构造函数，**必须第一行写super(参数)**
 作用：调用父类的构造函数，继承父类属性。
@@ -564,7 +564,7 @@ class Dog extends Animal{
 2. super 只能在**子类**内部使用，普通类不能用 super
 3. super 不能用来修改父类属性，只能调用父类构造 / 父类方法
 
-完整练习代码：day07-extends/index.ts
+完整练习代码：day08-extends/index.ts
 
 > 
-> 代码跳转：[day07-extends/index.ts](./day07-extends/index.ts)
+> 代码跳转：[day08-extends/index.ts](./day08-extends/index.ts)
