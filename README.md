@@ -478,9 +478,8 @@ dog.bark();
 完整练习代码：day06/constructor.ts
 ---
 
-```markdown
----
-## day07 TS 类继承
+
+# day07 TS 类继承
 ### 1. 继承基础 extends
 `extends` 关键字实现类继承，**子类可以复用父类的属性、方法**，减少重复代码。
 ```ts
@@ -523,3 +522,49 @@ class Student extends Person{
 完整练习代码：day07-extends/index.ts
 > 代码跳转：[day07-extends/index.ts](./day07-extends/index.ts)
 ```
+
+```
+---
+# day07 TS super关键字
+### 1. super 在构造函数内
+子类如果自定义`constructor`构造函数，**必须第一行写super(参数)**
+作用：调用父类的构造函数，继承父类属性。
+```ts
+class Animal {
+  name:string
+  constructor(name:string){
+    this.name = name
+  }
+}
+class Dog extends Animal{
+  age:number
+  constructor(name:string,age:number){
+    super(name) // 调用父类构造，给父类name赋值
+    this.age = age
+  }
+}
+```
+
+### 2. super 在类的方法里面
+
+在子类方法中 `super.方法名()` 代表调用**父类的同名方法**，复用父类逻辑，再扩展自己代码
+
+```
+class Dog extends Animal{
+  sayHello(){
+    super.sayHello() // 执行父类sayHello
+    console.log("小狗汪汪叫")
+  }
+}
+```
+
+### 3. 核心规则
+
+1. 子类构造函数，super 必须写在`this.xxx`前面
+2. super 只能在**子类**内部使用，普通类不能用 super
+3. super 不能用来修改父类属性，只能调用父类构造 / 父类方法
+
+完整练习代码：day07-extends/index.ts
+
+> 
+> 代码跳转：[day07-extends/index.ts](./day07-extends/index.ts)
