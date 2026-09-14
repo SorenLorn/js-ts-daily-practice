@@ -568,3 +568,51 @@ class Dog extends Animal{
 
 > 
 > 代码跳转：[day08-extends/index.ts](./day08-extends/index.ts)
+
+
+
+# day08 TS 抽象类 abstract
+### 1. 抽象类基础
+使用 `abstract class` 定义抽象类
+- 抽象类**不能直接 new 创建实例**，它的作用就是专门给子类继承
+- 普通类可以继承抽象类
+
+```ts
+abstract class Animal {
+  name:string
+  constructor(name:string){
+    this.name = name
+  }
+}
+// const a = new Animal() // ❌报错，抽象类不能实例化
+```
+
+### 2. 抽象方法 `abstract`
+
+- 抽象方法只能写在**抽象类**里面
+- 语法：`abstract 方法名():返回类型;`，**没有 {} 方法体**
+- ✅强制要求：**所有子类必须重写实现这个抽象方法**
+
+```
+abstract class Animal{
+  abstract sayHello():void; //抽象方法，没有代码实现
+}
+class Dog extends Animal{
+  //子类必须实现抽象方法，不写会直接报错
+  sayHello() {
+    console.log("小狗叫")
+  }
+}
+```
+
+### 3. 核心规则总结
+
+1. `abstract class` 抽象类，**禁止直接 new 实例**
+2. `abstract`抽象方法：只有声明，没有函数体
+3. 子类继承抽象类，**必须实现全部抽象方法**，否则报错
+4. 抽象类里面，可以同时写普通属性、普通方法、构造函数
+
+完整练习代码：day08-abstract/index.ts
+
+> 
+> 代码跳转：[day08-abstract/index.ts](./day08-abstract/index.ts)
