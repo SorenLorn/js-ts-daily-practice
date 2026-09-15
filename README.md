@@ -616,3 +616,75 @@ class Dog extends Animal{
 
 > 
 > 代码跳转：[day08-abstract/index.ts](./day08-abstract/index.ts)
+
+
+# Day09 接口 interface
+
+> 
+> 接口用来**约定对象长什么样**，只定义结构，不实现代码，仅做类型约束。
+
+### ✅ 基础定义
+
+```
+interface User {
+  name: string;   // 必填属性
+  age: number;
+  email?: string; // ? 可选属性，可以不写
+  readonly id: number; // readonly只读，赋值后不可修改
+}
+```
+
+- 规则：对象必须包含接口里**所有必填属性**，多写多余属性会报错
+- `readonly`：属性只读，只能初始化赋值，后面不能修改
+
+### ✅ 接口里写方法
+
+```
+interface User {
+  name:string
+  sayHello():void // 只声明方法签名，不写实现
+}
+const user:User = {
+  name:"张三",
+  sayHello(){
+    console.log("hello")
+  }
+}
+```
+
+### ✅ 接口继承 extends
+
+接口可以继承别的接口，拿到父接口全部成员，支持多继承
+
+```
+interface Animal { name:string }
+interface Dog extends Animal {
+  bark():void
+}
+```
+
+### ✅ 接口描述函数类型
+
+```
+interface AddFn {
+  (a:number,b:number):number
+}
+const add:AddFn = (x,y)=>x+y
+```
+
+### ✅ 接口合并（TS 独有特性）
+
+**同名 interface 会自动合并**，类型别名 type 不支持合并
+
+```
+interface Person { name:string }
+interface Person { age:number }
+// 合并后 Person 同时拥有 name + age
+const p:Person = {name:"小李",age:22}
+```
+
+### 🔔 interface 和 type 简单区分
+
+1. interface：适合定义**对象结构**，支持继承、自动合并
+2. type：类型别名，可以写联合类型、基础类型，**不能自动合并**
+> [day09-interface](./day09-interface/index.ts)
