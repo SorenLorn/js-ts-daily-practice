@@ -688,3 +688,56 @@ const p:Person = {name:"小李",age:22}
 1. interface：适合定义**对象结构**，支持继承、自动合并
 2. type：类型别名，可以写联合类型、基础类型，**不能自动合并**
 > [day09-interface](./day09-interface/index.ts)
+
+
+# Day10 encapsulate
+> 封装：保护类内部数据，禁止外部随意直接修改，通过get/set存取器控制读写权限
+
+#### 访问修饰符
+1. `public` 默认修饰符，公开，任意位置都可访问
+```ts
+class User {
+  public name:string = "张三"
+}
+```
+
+2. `private` 私有，**仅本类内部**能访问，实例、子类都无法读取
+
+```
+class User {
+  private _password:string = "123456"
+}
+```
+
+3. `protected` 受保护，本类 + 子类可访问，外部实例不能访问
+
+```
+class User {
+  protected id:number = 10001
+}
+```
+
+#### get /set 存取器
+
+读写私有属性，赋值时增加校验逻辑，封装核心用法
+
+```
+class Person {
+  private _age:number = 18
+  get age(){
+    return this._age
+  }
+  set age(val:number){
+    if(val>0 && val<150) this._age = val
+    else console.log("年龄不合法")
+  }
+}
+```
+
+#### 核心要点
+
+- 私有属性约定下划线`_`开头命名
+- 外部直接访问 private 属性会编译报错
+- set 可以拦截非法数据，保障数据有效性
+
+> [day10 encapsulte](./day10/day10-encapsulate.ts)
