@@ -741,3 +741,62 @@ class Person {
 - set 可以拦截非法数据，保障数据有效性
 
 > [day10 encapsulte](./day10/day10-encapsulate.ts)
+
+
+# Day11 泛型（Generic）
+> 泛型核心：**类型参数化**，让一份代码支持多种类型，同时保留TS类型校验，避免`any`丢失类型提示
+
+### 1. 基础泛型函数
+`<T>` 代表类型变量，T只是约定命名，也可以用U、V
+```typescript
+// T 是类型占位符，调用时传入真实类型
+function getValue<T>(arg: T): T {
+  return arg;
+}
+// 使用，显式传入类型
+const res = getValue<string>("test");
+```
+
+### 2. 泛型约束 `extends`
+
+限制泛型必须满足某些结构，不能传任意类型
+
+```
+// 要求传入的值必须拥有length属性
+function getLength<T extends { length: number }>(arg: T) {
+  return arg.length
+}
+getLength("123") // ✅字符串有length
+// getLength(123) // ❌数字没有length，直接报错
+```
+
+### 3. 泛型接口
+
+接口也可以接收类型参数，复用接口结构
+
+```
+interface IBox<T> {
+  value: T
+}
+const box: IBox<number> = {value: 100}
+```
+
+### 4. 泛型类
+
+类可以添加泛型，实例化时确定内部数据类型
+
+```
+class Container<T> {
+  content: T
+  constructor(content:T){
+    this.content = content
+  }
+}
+const demo = new Container<boolean>(true)
+```
+
+> 
+> ✅ 泛型好处：代码复用 + 完整类型检查，不用 any
+> ❗ 泛型是**编译期**的类型工具，编译成 JS 后会被擦除，运行时不存在
+
+练习代码：[day11-generic/day11-generic.ts](./day11-generic/day11-generic.ts)
